@@ -1,0 +1,62 @@
+<div class="container" nz-row>
+    <div id="amap-container" nz-col nzSpan="18">
+        <ngx-amap class="amap" [resizeEnable]="true" (ready)="onMapReady($event)"></ngx-amap>
+    </div>
+    <div nz-col nzSpan="6">
+        <div class="filter-top">
+            <button nz-button nz-popover nzPopoverTitle="关于" [nzPopoverContent]="aboutTemplate"
+                    nzPopoverTrigger="click">
+                关于
+            </button>
+        </div>
+        <div id="district-search">
+            <input nz-input type="text" [(ngModel)]="this.searchDistrict">
+
+            <nz-input-number style="width: 60px" [(ngModel)]="this.searchSubDistrictLevel" nzMin="0"
+                             [nzMax]="2"></nz-input-number>
+        </div>
+        <div id="filter">
+            <span class="span-title">填充</span>
+            <div class="filter-element">
+                <span>透明度</span>
+                <input type="number" placeholder="透明度" nz-input [(ngModel)]="this.fillOpacity" min="0" max="100"/>
+            </div>
+
+            <div class="filter-element">
+                <span>颜色</span>
+                <input nz-input type="color" [(ngModel)]="this.fillColor"/>
+            </div>
+
+            <span class="span-title">边界</span>
+
+            <div class="filter-element">
+                <span>透明度</span>
+                <input type="number" nz-input [(ngModel)]="this.strokeOpacity" min="0" max="100"/>
+            </div>
+            <div class="filter-element">
+                <span>颜色</span>
+                <input nz-input type="color" [(ngModel)]="this.strokeColor"/>
+            </div>
+            <div class="filter-element">
+                <span>宽度</span>
+                <input type="number" nz-input [(ngModel)]="this.strokeWeight" min="0" max="20"/>
+            </div>
+
+            <button nz-button (click)="mapfilter()">刷新</button>
+            <div id="refresh-comments">
+                <nz-switch [(ngModel)]="clean"></nz-switch>
+                <span>(是否清除当前图层)</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #aboutTemplate>
+    <div>
+        <p>并不支持显示乡镇级别行政区域的边界</p>
+    </div>
+    <h3>Issue</h3>
+    <div>
+        <p><a href="https://github.com/ivyxjc/ivy-map">github repository</a></p>
+    </div>
+</ng-template>
