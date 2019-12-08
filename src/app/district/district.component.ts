@@ -12,10 +12,10 @@ import {Utils} from '../utils/utils';
 export class DistrictComponent implements OnInit {
     searchDistrict = '江苏省';
 
-    fillOpacity = 70;
+    fillOpacity = 30;
     fillColor = '#CCF3FF';
     strokeColor = '#CC66CC';
-    strokeOpacity = 100;
+    strokeOpacity = 30;
     strokeWeight = 1;
     searchSubDistrictLevel = 0;
 
@@ -37,12 +37,12 @@ export class DistrictComponent implements OnInit {
             return new AMap.Polygon({
                 map,
                 path: e,
-                fillOpacity: this.fillOpacity / 100,
+                fillOpacity: 1 - this.fillOpacity / 100,
                 fillColor: tmpColor,
                 // fillColor: this.fillColor,
                 strokeColor: this.strokeColor,
                 strokeWeight: this.strokeWeight,
-                strokeOpacity: this.strokeOpacity / 100
+                strokeOpacity: 1 - this.strokeOpacity / 100
             });
         });
     }

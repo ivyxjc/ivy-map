@@ -19,7 +19,7 @@
             <span class="span-title">填充</span>
             <div class="filter-element">
                 <span>透明度</span>
-                <input type="number" placeholder="透明度" nz-input [(ngModel)]="this.fillOpacity" min="0" max="100"/>
+                <nz-input-number [(ngModel)]="this.fillOpacity" nzStep="10" nzMin="0" nzMax="100"></nz-input-number>
             </div>
 
             <div class="filter-element">
@@ -31,7 +31,7 @@
 
             <div class="filter-element">
                 <span>透明度</span>
-                <input type="number" nz-input [(ngModel)]="this.strokeOpacity" min="0" max="100"/>
+                <nz-input-number [(ngModel)]="this.strokeOpacity" nzStep="10" nzMin="0" nzMax="100"></nz-input-number>
             </div>
             <div class="filter-element">
                 <span>颜色</span>
@@ -39,7 +39,7 @@
             </div>
             <div class="filter-element">
                 <span>宽度</span>
-                <input type="number" nz-input [(ngModel)]="this.strokeWeight" min="0" max="20"/>
+                <nz-input-number [(ngModel)]="this.strokeWeight" nzMin="0" nzMax="20"></nz-input-number>
             </div>
 
             <button nz-button (click)="mapfilter()">刷新</button>
@@ -51,12 +51,26 @@
     </div>
 </div>
 
+
 <ng-template #aboutTemplate>
     <div>
         <p>并不支持显示乡镇级别行政区域的边界</p>
     </div>
-    <h3>Issue</h3>
+    <h2>Instruction</h2>
+
     <div>
-        <p><a href="https://github.com/ivyxjc/ivy-map">github repository</a></p>
+        <h3>1. 如何生成无边界的图?</h3>
+        <p>由于边界的最小宽度是1，所以要生成无边界的图请将边界透明度调整至100</p>
+    </div>
+
+    <div>
+        <h3>2. 是否清除当前图层含义?</h3>
+        <p>如果需要在当前已经拥有多边形的地图上添加多边形区域，请关闭该开关。<br/>
+            当该开关打开时，刷新按钮会从一个全新的地图上开始生成多边形。</p>
+    </div>
+
+    <h2>Issues</h2>
+    <div>
+        <p><a href="https://github.com/ivyxjc/ivy-map/issues">Github ivy-map Issues</a></p>
     </div>
 </ng-template>
