@@ -34,6 +34,7 @@ export class DistrictComponent implements OnInit {
         console.log('draw polygon');
         const tmpColor = Utils.getRandomColor();
         bounds.forEach(e => {
+            // @ts-ignore
             return new AMap.Polygon({
                 map,
                 path: e,
@@ -93,6 +94,7 @@ export class DistrictComponent implements OnInit {
 
     async mapfilter() {
         if (this.clean) {
+            // @ts-ignore
             this.map.remove(this.map.getAllOverlays());
         }
         this.onMapReady(this.map);
