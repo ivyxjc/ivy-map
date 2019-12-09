@@ -3,6 +3,7 @@ import {AmapDistrictSearchService, District, DistrictSearchResult} from 'ngx-ama
 import {CMap} from 'ngx-amap/types/class/amap.map';
 import {LngLat} from 'ngx-amap/types/class/amap.lng-lat';
 import {Utils} from '../utils/utils';
+import {NzNotificationService} from 'ng-zorro-antd';
 
 @Component({
     selector: 'app-district',
@@ -24,7 +25,7 @@ export class DistrictComponent implements OnInit {
     private map: CMap;
 
 
-    constructor(private amapDistrictSearch: AmapDistrictSearchService) {
+    constructor(private amapDistrictSearch: AmapDistrictSearchService, private notification: NzNotificationService) {
     }
 
     ngOnInit() {
@@ -69,6 +70,11 @@ export class DistrictComponent implements OnInit {
     async onMapReady(map) {
         this.map = map;
         const result = await this.search(this.searchDistrict);
+        console.log(result.districtList);
+        if (typeof result.districtList === 'undefined' || result.districtList == null) {
+            this.notification.error('错误', '未能查找到行政区[' + this.searchDistrict + ']');
+            return;
+        }
         const bounds = result.districtList[0].boundaries;
         if (this.searchSubDistrictLevel === 0) {
             await this.drawPolygon(map, bounds);
@@ -77,6 +83,7 @@ export class DistrictComponent implements OnInit {
             this.drawDistricts(map, subDistricts);
         }
         map.setFitView();
+
     }
 
     async drawDistricts(map: CMap, districtList: District[]) {
@@ -84,6 +91,10 @@ export class DistrictComponent implements OnInit {
             if (it.districtList == null || it.districtList.length === 0) {
                 const tmpResult = await this.search(it.name);
                 const tmpBounds = tmpResult.districtList[0].boundaries;
+                if (tmpBounds.length === 0) {
+                    this.notification.warning('WARN', '该地区没有边界信息 [' + it.name + '], 请降低搜索层级');
+                    return;
+                }
                 this.drawPolygon(map, tmpBounds);
             } else {
                 this.drawDistricts(map, it.districtList);
