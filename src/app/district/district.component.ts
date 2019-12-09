@@ -4,6 +4,7 @@ import {CMap} from 'ngx-amap/types/class/amap.map';
 import {LngLat} from 'ngx-amap/types/class/amap.lng-lat';
 import {Utils} from '../utils/utils';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {LocalStorage} from 'ngx-webstorage';
 
 @Component({
     selector: 'app-district',
@@ -11,22 +12,36 @@ import {NzNotificationService} from 'ng-zorro-antd';
     styleUrls: ['./district.component.less']
 })
 export class DistrictComponent implements OnInit {
-    searchDistrict = '江苏省';
+    @LocalStorage('searchDistrict', '江苏省')
+    public searchDistrict: string;
 
-    fillOpacity = 30;
-    fillColor = '#CCF3FF';
-    strokeColor = '#CC66CC';
-    strokeOpacity = 30;
-    strokeWeight = 1;
-    searchSubDistrictLevel = 0;
+    @LocalStorage('fillOpacity', 30)
+    fillOpacity: number;
 
-    clean = true;
+    @LocalStorage('fillColor', '#CCF3FF')
+    fillColor: string;
+
+    @LocalStorage('storkeColor', '#CC66CC')
+    strokeColor: string;
+
+    @LocalStorage('strokeOpacity', 30)
+    strokeOpacity: number;
+
+    @LocalStorage('strokeWeight', 1)
+    strokeWeight: number;
+
+    @LocalStorage('searchSubDistrictLevel', 0)
+    searchSubDistrictLevel: number;
+
+    @LocalStorage('clean', true)
+    clean: boolean;
 
     private map: CMap;
 
-
-    constructor(private amapDistrictSearch: AmapDistrictSearchService, private notification: NzNotificationService) {
+    constructor(private amapDistrictSearch: AmapDistrictSearchService,
+                private notification: NzNotificationService) {
     }
+
 
     ngOnInit() {
     }

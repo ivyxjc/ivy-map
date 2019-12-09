@@ -11,6 +11,7 @@ import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {NgxAmapModule} from 'ngx-amap';
 import {DistrictComponent} from './district/district.component';
+import {NgxWebstorageModule} from 'ngx-webstorage';
 
 registerLocaleData(zh);
 
@@ -26,6 +27,7 @@ registerLocaleData(zh);
         FormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
+        NgxWebstorageModule.forRoot(),
         NgxAmapModule.forRoot({
             apiKey: 'da378b889a34a657b6c704127a6e49b2'
         })
