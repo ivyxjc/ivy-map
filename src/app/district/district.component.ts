@@ -3,8 +3,8 @@ import {AmapDistrictSearchService, District, DistrictSearchResult} from 'ngx-ama
 import {CMap} from 'ngx-amap/types/class/amap.map';
 import {LngLat} from 'ngx-amap/types/class/amap.lng-lat';
 import {Utils} from '../utils/utils';
-import {NzNotificationService} from 'ng-zorro-antd';
 import {LocalStorage} from 'ngx-webstorage';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 
 @Component({
     selector: 'app-district',
